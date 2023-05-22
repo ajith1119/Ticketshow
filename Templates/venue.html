@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+          <style>  
+          
+          .venues {
+            width: 100%;
+          }
+          
+          .card {
+            
+            float: left;
+            padding: 20px;
+            border: 2px solid powderblue;
+            margin-left: 8px;
+          }
+          
+          
+          body {
+			background-color: #DDE1E6;
+			font-family: Verdana;
+			text-align: center;
+		}
+
+          
+          </style>
+          
+</head>
+
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+
+    <h1 style="Float:left"> Welcome {{user.username}}</h1>
+    <h2 style="Float:right">
+        <a href="/logout"> LogOut</a>
+    </h2>
+</nav>
+
+  <div class="col-12">
+
+<h1>The Venues are:</h1><br>
+
+  <form action = "/search" enctype="multipart/form-data" method = "POST">
+  <input type="search" name="search" placeholder="Search by Venue Place....">
+  <input type="submit">
+  </form>
+  
+  <br>
+                
+  <form action = "/deleteallvenues" enctype="multipart/form-data" method = "POST">
+    <button type="submit" class="btn btn-primary">Delete all venues</button>
+    </form>        
+
+
+
+  {% if user.username == 'ajith' %}
+
+  <form action = "/addvenue" enctype="multipart/form-data" method = "GET">
+    <button type="submit" class="btn btn-primary">Add a venue</button>
+    </form>
+
+  {% endif %}
+  <br>
+
+    <div class="venues">
+
+      {% for venue in venues %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"> {{ venue.name }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ venue.place }}</h6>
+                  <h6 class="card-text">{{ venue.capacity }}</h6>
+                  {% if user.username == 'ajith' %}
+                  <a href="/addvenue/{{venue['venueid']}}/edit" class="card-link">Edit</a>
+                  <a href="/addvenue/{{venue['venueid']}}/delete" class="card-link">Delete</a>
+                  <br><br>
+                  <form action="/addshow/{{venue['venueid']}}" method="GET">
+                    <button type="submit" class="btn btn-primary">Add a show</button>
+                  </form><br>
+
+                  {% endif %}
+
+                  <br>
+
+                  <form action="/displayshow/{{venue['venueid']}}" method="GET">
+                    <button type="submit" class="btn btn-primary">Display shows</button>
+                  </form>
+
+                  <br>
+                </div>
+              </div>
+              {% endfor %}
+
+          </div>
+</div>
+<br>
+<br>
+  
+</body>
+</html>

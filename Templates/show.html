@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+          <style>  
+          
+          .venues {
+            width: 100%;
+          }
+          
+          .card {
+            
+            float: left;
+            padding: 20px;
+            border: 2px solid powderblue;
+            margin-left: 13px;
+          }
+          
+          
+          body {
+			background-color: #DDE1E6;
+			font-family: Verdana;
+			text-align: center;
+		}
+          
+          </style>
+          
+</head>
+
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+
+    <h1 style="Float:left"> Welcome {{user.username}}</h1>
+    <h2 style="Float:right">
+        <a href="/logout"> LogOut</a>
+    </h2>
+</nav>
+
+<div class="row">
+
+<div class="col-12">
+<h1>The Shows are:</h1><br>
+
+
+<form action = "/showsearch" enctype="multipart/form-data" method = "POST">
+  <input type="search" name="search" placeholder="Search by tag name....">
+  <input type="submit">
+  </form>
+  <br>
+  <br>
+
+
+    <div class="venues">
+      {% for show in shows %}
+
+      {% if (venue['venueid'] == show['eshowid']) %}
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ show.showname }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ show.rating }}</h6>
+                  <h6 class="card-text">{{ show.price }}</h6>
+                  <h6 class="card-text">{{ show.showcapacity }}</h6>
+
+                  {% if user.username == "ajith" %}
+                  
+                  <a href="/addshow/{{venue['venueid']}}/{{show['showid']}}/edit" class="card-link">Edit</a>
+                  <a href="/addshow/{{venue['venueid']}}/{{show['showid']}}/delete" class="card-link">Delete</a>
+                  <br><br>
+
+                  {% endif %}
+
+                  {% if show.showcapacity == 0 %}
+
+                  <form action="/ticket/{{user['id']}}/{{venue['venueid']}}/{{show['showid']}}" method="GET">
+                    <button type="submit" class="btn btn-primary" disabled>HouseFull</button>
+                  </form>
+                </div>
+              </div>
+
+              {% else %}
+
+              <form action="/ticket/{{user['id']}}/{{venue['venueid']}}/{{show['showid']}}" method="GET">
+                <button type="submit" class="btn btn-primary">Book ticket</button>
+              </form>
+            </div>
+          </div>
+
+              {% endif %}
+
+
+              {% endif %}
+
+              {% endfor %}
+          </div>
+
+          <br>
+          <br>
+
+        </div>
+        </div>
+<br>
+
+<center>
+          <form action="/venuedisplay" method="GET">
+            <button type="submit" class="btn btn-primary">Back to venues</button>
+          </form>
+</center>
+  
+</body>
+</html>

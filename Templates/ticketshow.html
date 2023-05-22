@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+          <style>  
+          
+
+          .venues {
+            width: 100%;
+          }
+          
+          .card {
+            
+            float: left;
+            padding: 20px;
+            border: 2px solid powderblue;
+            margin-left: 13px;
+          }
+          
+          
+          body {
+			background-color: #DDE1E6;
+			font-family: Verdana;
+			text-align: center;
+		}
+          
+          </style>
+          
+</head>
+
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+
+    <h1 style="Float:left"> Welcome {{user.username}}</h1>
+    <h2 style="Float:right">
+        <a href="/logout"> LogOut</a>
+    </h2>
+</nav>
+
+<div class="row">
+
+
+<div class="col-12">
+
+<h1>The Tickets Booked are:</h1><br>
+    <div class="venues">
+
+      <h1>{{message}}</h1>
+
+      {% for ticket in tickets %}
+
+      {% if (user['id'] == ticket['euserid']) %}
+
+      {% if (show['showid'] == ticket['eticketid']) %}
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Ticket ID: {{ ticket.ticketid }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Name: {{ ticket.name }}</h6>
+                  <h6 class="card-text">Email: {{ ticket.email }}</h6>
+                  <h6 class="card-text">Phn no: {{ ticket.phoneno }}</h6>
+                  <h6 class="card-text">No.of.tickets: {{ ticket.nooftickets }}</h6>
+                
+
+                  <br><br>
+
+                  <br>
+                </div>
+              </div>
+
+              {% endif %}
+
+              {% endif %}
+
+              {% endfor %}
+
+          </div>
+          </div>
+          </div>
+
+<br>
+<br>
+  <center>
+            <form action="/venuedisplay" method="GET">
+              <button type="submit" class="btn btn-primary">Back to venues</button>
+            </form>
+    </center>
+  
+</body>
+</html>

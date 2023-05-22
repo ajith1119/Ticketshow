@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+
+        <h1 style="Float:left"> Welcome {{user.username}}</h1>
+        <h2 style="Float:right">
+            <a href="/logout"> LogOut</a>
+        </h2>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Enter Show Details:</h2><br>
+        <form action = "/addshow/{{venue['venueid']}}/{{show['showid']}}/edit" enctype="multipart/form-data" method = "POST">
+
+            <div class="form-group">
+                <label >Name of the show:</label>
+                <input type="text" class="form-control" name="showname">
+            </div>
+            <div class="form-group">
+                <label >Rating:</label>
+                <input type="number" class="form-control" name="rating">
+            </div>
+            <div class="form-group">
+                <label >Tag:</label>
+                <input type="text" class="form-control" name="tag" placeholder="Action / Comedy / Sci-fi / Romance ">
+            </div>
+            <div class="form-group">
+                <label >Price:</label>
+                <input type="number" class="form-control" name="price">
+            </div>
+            <div class="form-group">
+                <label >Show Capacity:</label>
+                <input type="number" class="form-control" name="showcapacity">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

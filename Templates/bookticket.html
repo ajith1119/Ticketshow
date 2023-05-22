@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+
+        <h1 style="Float:left"> Welcome {{user.username}}</h1>
+        <h2 style="Float:right">
+            <a href="/logout"> LogOut</a>
+        </h2>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Enter Show Details:</h2><br>
+        <form action = "/ticket/{{user['id']}}/{{venue['venueid']}}/{{show['showid']}}" enctype="multipart/form-data" method = "POST">
+
+            <div class="form-group">
+                <label >Name:</label>
+                <input type="text" class="form-control" name="personname">
+            </div>
+            <div class="form-group">
+                <label >email:</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label >Phone no:</label>
+                <input type="tel" class="form-control" name="phoneno">
+            </div>
+			<h5>Total No.of tickets available for this show = {{ show.showcapacity }}</h5>
+            <div class="form-group">
+                <label >Number of tickets:</label>
+                <input type="number" class="form-control" name="nooftickets">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
